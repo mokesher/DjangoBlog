@@ -3,7 +3,7 @@
 🌍
 *[English](README-en.md) ∙ [简体中文](README.md)*
 
-A blog system based on `python3.6` and `Django2.1`.
+A blog system based on `python3.8` and `Django3.0`.
 
 [![Build Status](https://travis-ci.org/liangliangyy/DjangoBlog.svg?branch=master)](https://travis-ci.org/liangliangyy/DjangoBlog) [![codecov](https://codecov.io/gh/liangliangyy/DjangoBlog/branch/master/graph/badge.svg)](https://codecov.io/gh/liangliangyy/DjangoBlog) [![Requirements Status](https://requires.io/github/liangliangyy/DjangoBlog/requirements.svg?branch=master)](https://requires.io/github/liangliangyy/DjangoBlog/requirements/?branch=master)  [![license](https://img.shields.io/github/license/liangliangyy/djangoblog.svg)]()  
 
@@ -46,7 +46,7 @@ Files in `test` directory are for `travis` with automatic testing. You do not ne
 
 In `bin` directory, we have scripts to deploy with `Nginx`+`Gunicorn`+`virtualenv`+`supervisor` on `linux` and `Nginx` configuration file. You can reference with my article
 
->[Using Nginx+Gunicorn+virtualenv+supervisor to deploy django project.](https://www.lylinux.org/%E4%BD%BF%E7%94%A8nginxgunicornvirtualenvsupervisor%E6%9D%A5%E9%83%A8%E7%BD%B2django%E9%A1%B9%E7%9B%AE.html)
+>[DjangoBlog部署教程](https://www.lylinux.net/article/2019/8/5/58.html)
 
 More deploy detail in this article.
 

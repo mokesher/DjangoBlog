@@ -1,7 +1,5 @@
 #!/usr/bin/env python
 # encoding: utf-8
-
-
 """
 @version: ??
 @author: liangliangyy
@@ -9,16 +7,19 @@
 @contact: liangliangyy@gmail.com
 @site: https://www.lylinux.net/
 @software: PyCharm
-@file: clear_cache.py
-@time: 2017/2/17 下午10:30
+@file: build_search_words.py
+@time: 2019/9/23 6:58 下午
 """
-from DjangoBlog.utils import cache
+
 from django.core.management.base import BaseCommand
+from blog.models import Article, Tag, Category
 
 
+# TODO 参数化
 class Command(BaseCommand):
-    help = 'clear the whole cache'
+    help = 'build search words'
 
     def handle(self, *args, **options):
-        cache.clear()
-        self.stdout.write(self.style.SUCCESS('Cleared cache\n'))
+        datas = set([t.name for t in Tag.objects.all()] +
+                    [t.name for t in Category.objects.all()])
+        print('\n'.join(datas))

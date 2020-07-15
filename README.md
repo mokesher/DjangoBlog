@@ -1,9 +1,9 @@
 # DjangoBlog
 
 🌍
-*[English](README-en.md) ∙ [简体中文](README.md)*
+*[English](/docs/README-en.md) ∙ [简体中文](README.md)*
 
-基于`python3.6`和`Django2.1`的博客。   
+基于`python3.8`和`Django3.0`的博客。   
 
 [![Build Status](https://travis-ci.org/liangliangyy/DjangoBlog.svg?branch=master)](https://travis-ci.org/liangliangyy/DjangoBlog) [![codecov](https://codecov.io/gh/liangliangyy/DjangoBlog/branch/master/graph/badge.svg)](https://codecov.io/gh/liangliangyy/DjangoBlog) [![Requirements Status](https://requires.io/github/liangliangyy/DjangoBlog/requirements.svg?branch=master)](https://requires.io/github/liangliangyy/DjangoBlog/requirements/?branch=master)  [![license](https://img.shields.io/github/license/liangliangyy/djangoblog.svg)]()  
 
@@ -46,7 +46,7 @@ mysql客户端从`pymysql`修改成了`mysqlclient`，具体请参考 [pypi](htt
 
 `bin`目录是在`linux`环境中使用`Nginx`+`Gunicorn`+`virtualenv`+`supervisor`来部署的脚本和`Nginx`配置文件.可以参考我的文章:
 
->[使用Nginx+Gunicorn+virtualenv+supervisor来部署django项目](https://www.lylinux.org/%E4%BD%BF%E7%94%A8nginxgunicornvirtualenvsupervisor%E6%9D%A5%E9%83%A8%E7%BD%B2django%E9%A1%B9%E7%9B%AE.html)
+>[DjangoBlog部署教程](https://www.lylinux.net/article/2019/8/5/58.html)
 
 有详细的部署介绍.
 
@@ -112,6 +112,7 @@ CREATE DATABASE `djangoblog` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8
 浏览器打开: http://127.0.0.1:8000/  就可以看到效果了。
 ## 更多配置:
 [更多配置介绍](/docs/config.md)
+[集成elasticsearch](/docs/es.md)
 
 ## 问题相关
 
@@ -122,4 +123,22 @@ CREATE DATABASE `djangoblog` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8
  如果本项目帮助到了你，请在[这里](https://github.com/liangliangyy/DjangoBlog/issues/214)留下你的网址，让更多的人看到。
 您的回复将会是我继续更新维护下去的动力。 
 
-🙏🙏🙏
+
+## 捐赠
+如果您觉得本项目对您有所帮助，欢迎您请我喝杯咖啡，您的支持是我最大的动力，您可以扫描下方二维码为我付款，谢谢。
+### 支付宝：
+<div>    
+<img src="https://resource.lylinux.net/image/2017/12/16/IMG_0207.jpg" width="150" height="150" />
+</div>  
+
+### 微信：
+<div>    
+<img src="https://resource.lylinux.net/image/2017/12/16/IMG_0206.jpg" width="150" height="150" />
+</div>
+
+---
+
+感谢jetbrains
+<div>    
+<a href="https://www.jetbrains.com/?from=DjangoBlog"><img src="https://resource.lylinux.net/image/2020/07/01/logo.png" width="150" height="150"></a>
+</div>

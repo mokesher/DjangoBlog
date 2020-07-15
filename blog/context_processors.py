@@ -13,9 +13,9 @@
 @time: 2016/11/6 下午4:23
 """
 from .models import Category, Article, Tag, BlogSettings
-from django.conf import settings
-from comments.models import Comment
 from DjangoBlog.utils import cache, get_blog_setting
+
+from datetime import datetime
 import logging
 
 logger = logging.getLogger(__name__)
@@ -39,13 +39,14 @@ def seo_processor(requests):
             'SITE_BASE_URL': requests.scheme + '://' + requests.get_host() + '/',
             'ARTICLE_SUB_LENGTH': setting.article_sub_length,
             'nav_category_list': Category.objects.all(),
-            'nav_pages': Article.objects.filter(type='p', status='p'),
+            'nav_pages': Article.objects.filter(
+                type='p',
+                status='p'),
             'OPEN_SITE_COMMENT': setting.open_site_comment,
             'BEIAN_CODE': setting.beiancode,
             'ANALYTICS_CODE': setting.analyticscode,
             "BEIAN_CODE_GONGAN": setting.gongan_beiancode,
-            "SHOW_GONGAN_CODE": setting.show_gongan_code
-
-        }
+            "SHOW_GONGAN_CODE": setting.show_gongan_code,
+            "CURRENT_YEAR": datetime.now().year}
         cache.set(key, value, 60 * 60 * 10)
         return value

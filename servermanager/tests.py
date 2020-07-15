@@ -1,7 +1,7 @@
 from django.test import Client, RequestFactory, TestCase
 from DjangoBlog.utils import get_current_site
 from .models import commands
-import datetime
+from django.utils import timezone
 from accounts.models import BlogUser
 from blog.models import Category, Article
 from .robot import search, category, recents
@@ -23,15 +23,17 @@ class ServerManagerTest(TestCase):
 
     def test_validate_comment(self):
         site = get_current_site().domain
-        user = BlogUser.objects.create_superuser(email="liangliangyy1@gmail.com",
-                                                 username="liangliangyy1", password="liangliangyy1")
+        user = BlogUser.objects.create_superuser(
+            email="liangliangyy1@gmail.com",
+            username="liangliangyy1",
+            password="liangliangyy1")
 
         self.client.login(username='liangliangyy1', password='liangliangyy1')
 
         c = Category()
         c.name = "categoryccc"
-        c.created_time = datetime.datetime.now()
-        c.last_mod_time = datetime.datetime.now()
+        c.created_time = timezone.now()
+        c.last_mod_time = timezone.now()
         c.save()
 
         article = Article()

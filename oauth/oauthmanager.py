@@ -65,13 +65,13 @@ class BaseOauthManager(metaclass=ABCMeta):
     def get_oauth_userinfo(self):
         pass
 
-    def do_get(self, url, params):
-        rsp = requests.get(url=url, params=params)
+    def do_get(self, url, params, headers=None):
+        rsp = requests.get(url=url, params=params, headers=headers)
         logger.info(rsp.text)
         return rsp.text
 
-    def do_post(self, url, params):
-        rsp = requests.post(url, params)
+    def do_post(self, url, params, headers=None):
+        rsp = requests.post(url, params, headers=headers)
         logger.info(rsp.text)
         return rsp.text
 
@@ -91,7 +91,11 @@ class WBOauthManager(BaseOauthManager):
         self.client_id = config.appkey if config else ''
         self.client_secret = config.appsecret if config else ''
         self.callback_url = config.callback_url if config else ''
-        super(WBOauthManager, self).__init__(access_token=access_token, openid=openid)
+        super(
+            WBOauthManager,
+            self).__init__(
+            access_token=access_token,
+            openid=openid)
 
     def get_authorization_url(self, nexturl='/'):
         params = {
@@ -158,7 +162,11 @@ class GoogleOauthManager(BaseOauthManager):
         self.client_id = config.appkey if config else ''
         self.client_secret = config.appsecret if config else ''
         self.callback_url = config.callback_url if config else ''
-        super(GoogleOauthManager, self).__init__(access_token=access_token, openid=openid)
+        super(
+            GoogleOauthManager,
+            self).__init__(
+            access_token=access_token,
+            openid=openid)
 
     def get_authorization_url(self, nexturl='/'):
         params = {
@@ -229,7 +237,11 @@ class GitHubOauthManager(BaseOauthManager):
         self.client_id = config.appkey if config else ''
         self.client_secret = config.appsecret if config else ''
         self.callback_url = config.callback_url if config else ''
-        super(GitHubOauthManager, self).__init__(access_token=access_token, openid=openid)
+        super(
+            GitHubOauthManager,
+            self).__init__(
+            access_token=access_token,
+            openid=openid)
 
     def get_authorization_url(self, nexturl='/'):
         params = {
@@ -263,11 +275,9 @@ class GitHubOauthManager(BaseOauthManager):
 
     def get_oauth_userinfo(self):
 
-        params = {
-            'access_token': self.access_token
-        }
-        rsp = self.do_get(self.API_URL, params)
-
+        rsp = self.do_get(self.API_URL, params={}, headers={
+            "Authorization": "token " + self.access_token
+        })
         try:
             datas = json.loads(rsp)
             user = OAuthUser()
@@ -279,7 +289,6 @@ class GitHubOauthManager(BaseOauthManager):
             user.matedata = rsp
             if 'email' in datas and datas['email']:
                 user.email = datas['email']
-
             return user
         except Exception as e:
             logger.error(e)
@@ -298,7 +307,11 @@ class FaceBookOauthManager(BaseOauthManager):
         self.client_id = config.appkey if config else ''
         self.client_secret = config.appsecret if config else ''
         self.callback_url = config.callback_url if config else ''
-        super(FaceBookOauthManager, self).__init__(access_token=access_token, openid=openid)
+        super(
+            FaceBookOauthManager,
+            self).__init__(
+            access_token=access_token,
+            openid=openid)
 
     def get_authorization_url(self, nexturl='/'):
         params = {
@@ -365,7 +378,11 @@ class QQOauthManager(BaseOauthManager):
         self.client_id = config.appkey if config else ''
         self.client_secret = config.appsecret if config else ''
         self.callback_url = config.callback_url if config else ''
-        super(QQOauthManager, self).__init__(access_token=access_token, openid=openid)
+        super(
+            QQOauthManager,
+            self).__init__(
+            access_token=access_token,
+            openid=openid)
 
     def get_authorization_url(self, nexturl='/'):
         params = {
@@ -401,7 +418,10 @@ class QQOauthManager(BaseOauthManager):
             }
             rsp = self.do_get(self.OPEN_ID_URL, params)
             if rsp:
-                rsp = rsp.replace('callback(', '').replace(')', '').replace(';', '')
+                rsp = rsp.replace(
+                    'callback(', '').replace(
+                    ')', '').replace(
+                    ';', '')
                 obj = json.loads(rsp)
                 openid = str(obj['openid'])
                 self.openid = openid
@@ -445,7 +465,10 @@ def get_oauth_apps():
 def get_manager_by_type(type):
     applications = get_oauth_apps()
     if applications:
-        finds = list(filter(lambda x: x.ICON_NAME.lower() == type.lower(), applications))
+        finds = list(
+            filter(
+                lambda x: x.ICON_NAME.lower() == type.lower(),
+                applications))
         if finds:
             return finds[0]
     return None

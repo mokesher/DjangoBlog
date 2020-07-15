@@ -19,8 +19,7 @@ from django.conf import settings
 from django.utils.feedgenerator import Rss201rev2Feed
 from DjangoBlog.utils import CommonMarkdown
 from django.contrib.auth import get_user_model
-from django.contrib.auth.models import User
-from DjangoBlog.utils import get_current_site
+from datetime import datetime
 
 
 class DjangoBlogFeed(Feed):
@@ -37,7 +36,7 @@ class DjangoBlogFeed(Feed):
         return get_user_model().objects.first().get_absolute_url()
 
     def items(self):
-        return Article.objects.order_by('-pk')[:5]
+        return Article.objects.filter(type='a', status='p').order_by('-pub_time')[:5]
 
     def item_title(self, item):
         return item.title
@@ -46,8 +45,8 @@ class DjangoBlogFeed(Feed):
         return CommonMarkdown.get_markdown(item.body)
 
     def feed_copyright(self):
-        # print(get_current_site().name)
-        return "Copyright© 2018 且听风吟"
+        now = datetime.now()
+        return "Copyright© {year} 且听风吟".format(year=now.year)
 
     def item_link(self, item):
         return item.get_absolute_url()
